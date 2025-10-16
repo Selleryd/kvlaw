@@ -289,7 +289,7 @@
         <div class="progress-bar" id="progress-bar"></div>
     </div>
 
-   <!-- Navigation -->
+ <!-- Navigation -->
 <nav class="minimal-nav fixed top-0 w-full z-50 bg-white/90 backdrop-blur">
   <div class="container-luxury">
     <div class="flex justify-between items-center h-20">
@@ -299,9 +299,7 @@
             <path d="M12 2L3.09 8.26L12 14L20.91 8.26L12 2ZM21 16L12 22L3 16L12 10L21 16Z"/>
           </svg>
         </div>
-        <div>
-          <div class="font-serif text-xl font-medium text-deep-charcoal">Kensington & Vale</div>
-        </div>
+        <div class="font-serif text-xl font-medium text-deep-charcoal">Kensington & Vale</div>
       </div>
 
       <!-- Desktop nav -->
@@ -328,25 +326,42 @@
   </div>
 </nav>
 
-<!-- Mobile menu (appears below the fixed nav) -->
-<div id="mobile-menu-root" class="lg:hidden">
-  <!-- Click-away overlay -->
-  <div id="mobile-menu-overlay"
-       class="fixed inset-0 bg-black/30 opacity-0 pointer-events-none transition-opacity duration-200"></div>
+<!-- Full-screen mobile menu -->
+<div id="mobile-menu-panel"
+     class="fixed inset-0 z-[70] hidden lg:hidden">
+  <!-- Solid backdrop -->
+  <div class="absolute inset-0 bg-white"></div>
 
-  <!-- Panel -->
-  <div id="mobile-menu-panel"
-       class="fixed inset-x-0 top-20 origin-top scale-y-95 opacity-0 -translate-y-2
-              bg-white border-t border-neutral-200 shadow-xl
-              transition-all duration-200 ease-out
-              pointer-events-none">
-    <nav class="px-6 py-4 space-y-1">
-      <a href="#home" class="block py-3 text-base nav-item">Home</a>
-      <a href="#about" class="block py-3 text-base nav-item">About</a>
-      <a href="#services" class="block py-3 text-base nav-item">Services</a>
-      <a href="#results" class="block py-3 text-base nav-item">Results</a>
-      <a href="#team" class="block py-3 text-base nav-item">Team</a>
-      <a href="#contact" class="block py-3 text-base nav-item">Contact</a>
+  <!-- Panel content -->
+  <div class="relative h-full w-full flex flex-col">
+    <!-- Panel header with X -->
+    <div class="flex items-center justify-between h-20 px-6 border-b border-neutral-200">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 bg-luxury-gold flex items-center justify-center">
+          <svg class="w-6 h-6 text-deep-charcoal" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2L3.09 8.26L12 14L20.91 8.26L12 2ZM21 16L12 22L3 16L12 10L21 16Z"/>
+          </svg>
+        </div>
+        <div class="font-serif text-xl font-medium text-deep-charcoal">Kensington & Vale</div>
+      </div>
+
+      <button id="mobile-menu-close"
+              class="p-2 rounded-md focus:outline-none focus-visible:ring"
+              aria-label="Close menu">
+        <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 6l12 12M18 6L6 18"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Links -->
+    <nav class="px-6 py-4 grow overflow-y-auto">
+      <a href="#home" class="block py-4 text-lg text-deep-charcoal nav-item" data-close>Home</a>
+      <a href="#about" class="block py-4 text-lg text-deep-charcoal nav-item" data-close>About</a>
+      <a href="#services" class="block py-4 text-lg text-deep-charcoal nav-item" data-close>Services</a>
+      <a href="#results" class="block py-4 text-lg text-deep-charcoal nav-item" data-close>Results</a>
+      <a href="#team" class="block py-4 text-lg text-deep-charcoal nav-item" data-close>Team</a>
+      <a href="#contact" class="block py-4 text-lg text-deep-charcoal nav-item" data-close>Contact</a>
     </nav>
   </div>
 </div>
@@ -917,40 +932,44 @@
   (function () {
     const btn = document.getElementById('mobile-menu-btn');
     const panel = document.getElementById('mobile-menu-panel');
-    const overlay = document.getElementById('mobile-menu-overlay');
+    const closeBtn = document.getElementById('mobile-menu-close');
 
     const open = () => {
-      panel.classList.remove('opacity-0', '-translate-y-2', 'pointer-events-none', 'scale-y-95');
-      overlay.classList.remove('opacity-0', 'pointer-events-none');
-      document.body.classList.add('overflow-hidden');
+      panel.classList.remove('hidden');
+      document.body.classList.add('overflow-hidden'); // stop background scroll
       btn.setAttribute('aria-expanded', 'true');
       btn.setAttribute('aria-label', 'Close menu');
     };
 
     const close = () => {
-      panel.classList.add('opacity-0', '-translate-y-2', 'pointer-events-none', 'scale-y-95');
-      overlay.classList.add('opacity-0', 'pointer-events-none');
+      panel.classList.add('hidden');
       document.body.classList.remove('overflow-hidden');
       btn.setAttribute('aria-expanded', 'false');
       btn.setAttribute('aria-label', 'Open menu');
     };
 
-    const isOpen = () => !panel.classList.contains('pointer-events-none');
+    btn.addEventListener('click', () => {
+      panel.classList.contains('hidden') ? open() : close();
+    });
 
-    btn.addEventListener('click', () => (isOpen() ? close() : open()));
-    overlay.addEventListener('click', close);
+    closeBtn.addEventListener('click', close);
 
-    // Close on link click (jump to anchor then hide panel)
-    panel.querySelectorAll('a').forEach(a => {
+    // Close when clicking a link (hash anchors work exactly like desktop)
+    panel.querySelectorAll('[data-close]').forEach(a => {
       a.addEventListener('click', () => {
-        // allow the browser to start the anchor jump, then close
+        // Let the browser navigate to the hash first
         setTimeout(close, 0);
       });
     });
 
     // Close on ESC
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && isOpen()) close();
+      if (e.key === 'Escape' && !panel.classList.contains('hidden')) close();
+    });
+
+    // Optional: close when clicking the white backdrop (outside the inner content)
+    panel.addEventListener('click', (e) => {
+      if (e.target === panel) close();
     });
   })();
 </script>
