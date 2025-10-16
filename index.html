@@ -289,38 +289,68 @@
         <div class="progress-bar" id="progress-bar"></div>
     </div>
 
-    <!-- Navigation -->
-    <nav class="minimal-nav fixed top-0 w-full z-50">
-        <div class="container-luxury">
-            <div class="flex justify-between items-center h-20">
-                <div class="flex items-center space-x-4">
-                    <div class="w-10 h-10 bg-luxury-gold flex items-center justify-center">
-                        <svg class="w-6 h-6 text-deep-charcoal" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2L3.09 8.26L12 14L20.91 8.26L12 2ZM21 16L12 22L3 16L12 10L21 16Z"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <div class="font-serif text-xl font-medium text-deep-charcoal">Kensington & Vale</div>
-                    </div>
-                </div>
-                
-                <div class="hidden lg:flex space-x-12">
-                    <a href="#home" class="nav-item">Home</a>
-                    <a href="#about" class="nav-item">About</a>
-                    <a href="#services" class="nav-item">Services</a>
-                    <a href="#results" class="nav-item">Results</a>
-                    <a href="#team" class="nav-item">Team</a>
-                    <a href="#contact" class="nav-item">Contact</a>
-                </div>
-                
-                <button id="mobile-menu-btn" class="lg:hidden text-deep-charcoal">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-            </div>
+   <!-- Navigation -->
+<nav class="minimal-nav fixed top-0 w-full z-50 bg-white/90 backdrop-blur">
+  <div class="container-luxury">
+    <div class="flex justify-between items-center h-20">
+      <div class="flex items-center space-x-4">
+        <div class="w-10 h-10 bg-luxury-gold flex items-center justify-center">
+          <svg class="w-6 h-6 text-deep-charcoal" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2L3.09 8.26L12 14L20.91 8.26L12 2ZM21 16L12 22L3 16L12 10L21 16Z"/>
+          </svg>
         </div>
+        <div>
+          <div class="font-serif text-xl font-medium text-deep-charcoal">Kensington & Vale</div>
+        </div>
+      </div>
+
+      <!-- Desktop nav -->
+      <div class="hidden lg:flex space-x-12">
+        <a href="#home" class="nav-item">Home</a>
+        <a href="#about" class="nav-item">About</a>
+        <a href="#services" class="nav-item">Services</a>
+        <a href="#results" class="nav-item">Results</a>
+        <a href="#team" class="nav-item">Team</a>
+        <a href="#contact" class="nav-item">Contact</a>
+      </div>
+
+      <!-- Mobile toggle -->
+      <button id="mobile-menu-btn"
+              class="lg:hidden text-deep-charcoal p-2 rounded-md focus:outline-none focus-visible:ring"
+              aria-controls="mobile-menu-panel"
+              aria-expanded="false"
+              aria-label="Open menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu (appears below the fixed nav) -->
+<div id="mobile-menu-root" class="lg:hidden">
+  <!-- Click-away overlay -->
+  <div id="mobile-menu-overlay"
+       class="fixed inset-0 bg-black/30 opacity-0 pointer-events-none transition-opacity duration-200"></div>
+
+  <!-- Panel -->
+  <div id="mobile-menu-panel"
+       class="fixed inset-x-0 top-20 origin-top scale-y-95 opacity-0 -translate-y-2
+              bg-white border-t border-neutral-200 shadow-xl
+              transition-all duration-200 ease-out
+              pointer-events-none">
+    <nav class="px-6 py-4 space-y-1">
+      <a href="#home" class="block py-3 text-base nav-item">Home</a>
+      <a href="#about" class="block py-3 text-base nav-item">About</a>
+      <a href="#services" class="block py-3 text-base nav-item">Services</a>
+      <a href="#results" class="block py-3 text-base nav-item">Results</a>
+      <a href="#team" class="block py-3 text-base nav-item">Team</a>
+      <a href="#contact" class="block py-3 text-base nav-item">Contact</a>
     </nav>
+  </div>
+</div>
+
 
     <!-- Hero Section -->
     <section id="home" class="section-spacing bg-warm-white">
@@ -715,7 +745,7 @@
                         </div>
                         <div>
                             <div class="text-white font-medium mb-2">Phone</div>
-                            <div>(212) 555-0147</div>
+                            <div>(850) 427-6026</div>
                         </div>
                         <div>
                             <div class="text-white font-medium mb-2">Email</div>
@@ -883,4 +913,45 @@
         }
     </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98f9c7fbc49a435c',t:'MTc2MDY0MTAzOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>
+  (function () {
+    const btn = document.getElementById('mobile-menu-btn');
+    const panel = document.getElementById('mobile-menu-panel');
+    const overlay = document.getElementById('mobile-menu-overlay');
+
+    const open = () => {
+      panel.classList.remove('opacity-0', '-translate-y-2', 'pointer-events-none', 'scale-y-95');
+      overlay.classList.remove('opacity-0', 'pointer-events-none');
+      document.body.classList.add('overflow-hidden');
+      btn.setAttribute('aria-expanded', 'true');
+      btn.setAttribute('aria-label', 'Close menu');
+    };
+
+    const close = () => {
+      panel.classList.add('opacity-0', '-translate-y-2', 'pointer-events-none', 'scale-y-95');
+      overlay.classList.add('opacity-0', 'pointer-events-none');
+      document.body.classList.remove('overflow-hidden');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'Open menu');
+    };
+
+    const isOpen = () => !panel.classList.contains('pointer-events-none');
+
+    btn.addEventListener('click', () => (isOpen() ? close() : open()));
+    overlay.addEventListener('click', close);
+
+    // Close on link click (jump to anchor then hide panel)
+    panel.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        // allow the browser to start the anchor jump, then close
+        setTimeout(close, 0);
+      });
+    });
+
+    // Close on ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen()) close();
+    });
+  })();
+</script>
 </html>
