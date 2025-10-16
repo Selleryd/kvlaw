@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kensington & Vale - Elite Commercial Litigation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap');
+        
+        .font-sans { font-family: 'Inter', sans-serif; }
+        .font-serif { font-family: 'Cormorant Garamond', serif; }
+        
+        :root {
+            --luxury-gold: #D4AF37;
+            --deep-charcoal: #1A1A1A;
+            --soft-charcoal: #2A2A2A;
+            --warm-white: #FEFEFE;
+            --pearl-gray: #F8F8F8;
+            --muted-gray: #8A8A8A;
+            --accent-gold: #B8860B;
+        }
+        
+        .bg-luxury-gold { background-color: var(--luxury-gold); }
+        .bg-deep-charcoal { background-color: var(--deep-charcoal); }
+        .bg-soft-charcoal { background-color: var(--soft-charcoal); }
+        .bg-warm-white { background-color: var(--warm-white); }
+        .bg-pearl-gray { background-color: var(--pearl-gray); }
+        
+        .text-luxury-gold { color: var(--luxury-gold); }
+        .text-deep-charcoal { color: var(--deep-charcoal); }
+        .text-muted-gray { color: var(--muted-gray); }
+        
+        .luxury-gradient {
+            background: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);
+        }
+        
+        .minimal-card {
+            background: var(--warm-white);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+        }
+        
+        .minimal-card:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            transform: translateY(-8px);
+        }
+        
+        .luxury-button {
+            background: var(--luxury-gold);
+            color: var(--deep-charcoal);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .luxury-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.8s;
+        }
+        
+        .luxury-button:hover::before {
+            left: 100%;
+        }
+        
+        .luxury-button:hover {
+            background: var(--accent-gold);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.3);
+        }
+        
+        .outline-button {
+            background: transparent;
+            color: var(--luxury-gold);
+            border: 1px solid var(--luxury-gold);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        .outline-button:hover {
+            background: var(--luxury-gold);
+            color: var(--deep-charcoal);
+            transform: translateY(-2px);
+        }
+        
+        .section-spacing {
+            padding: 120px 0;
+        }
+        
+        .container-luxury {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        .minimal-nav {
+            background: rgba(254, 254, 254, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        
+        .nav-item {
+            color: var(--deep-charcoal);
+            font-weight: 400;
+            font-size: 15px;
+            letter-spacing: 0.3px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 8px 0;
+        }
+        
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--luxury-gold);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-item:hover::after {
+            width: 100%;
+        }
+        
+        .nav-item:hover {
+            color: var(--luxury-gold);
+        }
+        
+        .luxury-divider {
+            width: 60px;
+            height: 1px;
+            background: var(--luxury-gold);
+            margin: 60px auto;
+        }
+        
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 300;
+            color: var(--luxury-gold);
+            letter-spacing: -2px;
+            line-height: 1;
+        }
+        
+        .minimal-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s ease;
+        }
+        
+        .minimal-icon:hover {
+            background: rgba(212, 175, 55, 0.15);
+            border-color: rgba(212, 175, 55, 0.4);
+            transform: translateY(-4px);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .luxury-input {
+            background: var(--warm-white);
+            border: 1px solid rgba(138, 138, 138, 0.2);
+            color: var(--deep-charcoal);
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+        
+        .luxury-input:focus {
+            outline: none;
+            border-color: var(--luxury-gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+        
+        .luxury-input::placeholder {
+            color: var(--muted-gray);
+        }
+        
+        .testimonial-card {
+            background: var(--warm-white);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        .testimonial-card:hover {
+            border-color: rgba(212, 175, 55, 0.2);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.06);
+        }
+        
+        .quote-mark {
+            font-size: 4rem;
+            color: rgba(212, 175, 55, 0.3);
+            line-height: 1;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        @media (max-width: 768px) {
+            .container-luxury {
+                padding: 0 20px;
+            }
+            
+            .section-spacing {
+                padding: 80px 0;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+        }
+        
+        .hero-text {
+            font-size: 5rem;
+            font-weight: 300;
+            line-height: 1.1;
+            letter-spacing: -2px;
+        }
+        
+        .subtitle-text {
+            font-size: 1.25rem;
+            font-weight: 300;
+            line-height: 1.6;
+            color: var(--muted-gray);
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            font-weight: 400;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+        
+        .minimal-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(212, 175, 55, 0.1);
+            z-index: 1000;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: var(--luxury-gold);
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+        
+        .luxury-spacing {
+            margin-bottom: 80px;
+        }
+        
+        .text-balance {
+            text-wrap: balance;
+        }
+    </style>
+</head>
+<body class="font-sans bg-warm-white text-deep-charcoal">
+    <!-- Progress Bar -->
+    <div class="minimal-progress">
+        <div class="progress-bar" id="progress-bar"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="minimal-nav fixed top-0 w-full z-50">
+        <div class="container-luxury">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center space-x-4">
+                    <div class="w-10 h-10 bg-luxury-gold flex items-center justify-center">
+                        <svg class="w-6 h-6 text-deep-charcoal" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L3.09 8.26L12 14L20.91 8.26L12 2ZM21 16L12 22L3 16L12 10L21 16Z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="font-serif text-xl font-medium text-deep-charcoal">Kensington & Vale</div>
+                    </div>
+                </div>
+                
+                <div class="hidden lg:flex space-x-12">
+                    <a href="#home" class="nav-item">Home</a>
+                    <a href="#about" class="nav-item">About</a>
+                    <a href="#services" class="nav-item">Services</a>
+                    <a href="#results" class="nav-item">Results</a>
+                    <a href="#team" class="nav-item">Team</a>
+                    <a href="#contact" class="nav-item">Contact</a>
+                </div>
+                
+                <button id="mobile-menu-btn" class="lg:hidden text-deep-charcoal">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="section-spacing bg-warm-white">
+        <div class="container-luxury">
+            <div class="text-center max-w-4xl mx-auto">
+                <div class="luxury-spacing fade-in">
+                    <h1 class="hero-text font-serif text-deep-charcoal mb-8 text-balance">
+                        Elite Commercial Litigation
+                    </h1>
+                    <p class="subtitle-text max-w-2xl mx-auto mb-12">
+                        Representing Fortune 500 companies in the most complex commercial disputes with strategic precision and unparalleled results.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                        <button class="luxury-button px-8 py-4 text-lg">Schedule Consultation</button>
+                    </div>
+                </div>
+                
+                <div class="luxury-divider"></div>
+                
+                <div class="grid md:grid-cols-4 gap-12 fade-in">
+                    <div class="text-center">
+                        <div class="stat-number font-serif mb-2" data-target="98">0</div>
+                        <div class="text-muted-gray font-medium">Win Rate %</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="stat-number font-serif mb-2" data-target="4.8">0</div>
+                        <div class="text-muted-gray font-medium">Billion Recovered</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="stat-number font-serif mb-2" data-target="750">0</div>
+                        <div class="text-muted-gray font-medium">Cases Won</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="stat-number font-serif mb-2" data-target="32">0</div>
+                        <div class="text-muted-gray font-medium">Years Excellence</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-spacing bg-pearl-gray">
+        <div class="container-luxury">
+            <div class="grid lg:grid-cols-2 gap-20 items-center">
+                <div class="fade-in">
+                    <h2 class="section-title font-serif text-deep-charcoal mb-8 text-balance">
+                        Dedicated to Your Ultimate Success
+                    </h2>
+                    <p class="subtitle-text mb-12">
+                        For over three decades, we have maintained the highest standards of legal excellence, representing clients where precision, strategy, and results are paramount.
+                    </p>
+                    <div class="space-y-6 mb-12">
+                        <div class="flex items-start">
+                            <div class="w-2 h-2 bg-luxury-gold rounded-full mt-3 mr-6 flex-shrink-0"></div>
+                            <span class="text-muted-gray">Elite legal expertise across all commercial sectors</span>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-2 h-2 bg-luxury-gold rounded-full mt-3 mr-6 flex-shrink-0"></div>
+                            <span class="text-muted-gray">Strategic litigation with unprecedented results</span>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-2 h-2 bg-luxury-gold rounded-full mt-3 mr-6 flex-shrink-0"></div>
+                            <span class="text-muted-gray">Exceptional client partnership and service</span>
+                        </div>
+                    </div>
+                    <button class="luxury-button px-8 py-4">Learn More</button>
+                </div>
+                
+                <div class="fade-in">
+                    <div class="minimal-card p-12 rounded-none">
+                        <div class="text-center mb-12">
+                            <div class="text-6xl font-serif font-light text-luxury-gold mb-4">$4.8B+</div>
+                            <div class="text-muted-gray">Total Client Recovery</div>
+                        </div>
+                        <div class="testimonial-card p-8 rounded-none">
+                            <div class="quote-mark mb-4">"</div>
+                            <p class="text-deep-charcoal italic text-lg leading-relaxed mb-6">
+                                Exceptional results in the most challenging disputes. Their strategic approach and courtroom excellence are truly unmatched in the industry.
+                            </p>
+                            <div class="text-luxury-gold font-medium">Fortune 100 General Counsel</div>
+                            <div class="text-muted-gray text-sm">Technology Sector</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section-spacing bg-warm-white">
+        <div class="container-luxury">
+            <div class="text-center mb-20 fade-in">
+                <h2 class="section-title font-serif text-deep-charcoal mb-8 text-balance">
+                    Comprehensive Legal Solutions
+                </h2>
+                <p class="subtitle-text max-w-2xl mx-auto">
+                    Strategic legal services designed for the most complex commercial challenges
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-3 gap-12">
+                <div class="minimal-card p-10 rounded-none text-center fade-in">
+                    <div class="minimal-icon rounded-none mx-auto mb-8">
+                        <svg class="w-8 h-8 text-luxury-gold" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L2 7V10C2 16 6 20.5 12 22C18 20.5 22 16 22 10V7L12 2ZM11 14L7.5 10.5L8.91 9.09L11 11.18L15.09 7.09L16.5 8.5L11 14Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-serif font-medium mb-6 text-deep-charcoal">Commercial Litigation</h3>
+                    <p class="text-muted-gray leading-relaxed">
+                        Complex business disputes requiring sophisticated legal strategies and exceptional advocacy in federal and state courts.
+                    </p>
+                </div>
+                
+                <div class="minimal-card p-10 rounded-none text-center fade-in" style="animation-delay: 0.1s;">
+                    <div class="minimal-icon rounded-none mx-auto mb-8">
+                        <svg class="w-8 h-8 text-luxury-gold" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-serif font-medium mb-6 text-deep-charcoal">Contract Disputes</h3>
+                    <p class="text-muted-gray leading-relaxed">
+                        High-value contract enforcement and breach of contract litigation involving complex commercial relationships.
+                    </p>
+                </div>
+                
+                <div class="minimal-card p-10 rounded-none text-center fade-in" style="animation-delay: 0.2s;">
+                    <div class="minimal-icon rounded-none mx-auto mb-8">
+                        <svg class="w-8 h-8 text-luxury-gold" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M5,6H23V18H5V6M14,9A3,3 0 0,1 17,12A3,3 0 0,1 14,15A3,3 0 0,1 11,12A3,3 0 0,1 14,9M9,8A2,2 0 0,1 7,10V14A2,2 0 0,1 9,16H19A2,2 0 0,1 21,14V10A2,2 0 0,1 19,8H9Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-serif font-medium mb-6 text-deep-charcoal">Securities Litigation</h3>
+                    <p class="text-muted-gray leading-relaxed">
+                        Complex securities litigation, regulatory compliance, and enforcement defense matters.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section id="results" class="section-spacing bg-pearl-gray">
+        <div class="container-luxury">
+            <div class="text-center mb-20 fade-in">
+                <h2 class="section-title font-serif text-deep-charcoal mb-8 text-balance">
+                    Landmark Victories
+                </h2>
+                <p class="subtitle-text max-w-2xl mx-auto">
+                    Our track record demonstrates unwavering commitment to excellence
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-3 gap-12">
+                <div class="minimal-card p-10 rounded-none fade-in">
+                    <div class="text-4xl font-serif font-light text-luxury-gold mb-6">$680M</div>
+                    <h4 class="text-xl font-serif font-medium mb-6 text-deep-charcoal">Contract Breach Victory</h4>
+                    <p class="text-muted-gray leading-relaxed mb-6">
+                        Record-breaking damages in international supply chain dispute across 22 countries with complex jurisdictional issues.
+                    </p>
+                    <div class="text-luxury-gold text-sm font-medium">FEDERAL COURT • 2024</div>
+                </div>
+                
+                <div class="minimal-card p-10 rounded-none fade-in" style="animation-delay: 0.1s;">
+                    <div class="text-4xl font-serif font-light text-luxury-gold mb-6">$520M</div>
+                    <h4 class="text-xl font-serif font-medium mb-6 text-deep-charcoal">Securities Recovery</h4>
+                    <p class="text-muted-gray leading-relaxed mb-6">
+                        Landmark judgment in securities fraud involving systematic corporate misrepresentation and market manipulation.
+                    </p>
+                    <div class="text-luxury-gold text-sm font-medium">SUPREME COURT • 2023</div>
+                </div>
+                
+                <div class="minimal-card p-10 rounded-none fade-in" style="animation-delay: 0.2s;">
+                    <div class="text-4xl font-serif font-light text-luxury-gold mb-6">$450M</div>
+                    <h4 class="text-xl font-serif font-medium mb-6 text-deep-charcoal">Trade Secret Victory</h4>
+                    <p class="text-muted-gray leading-relaxed mb-6">
+                        Comprehensive relief in corporate espionage case with criminal referrals and permanent injunctive relief.
+                    </p>
+                    <div class="text-luxury-gold text-sm font-medium">APPELLATE COURT • 2023</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="section-spacing bg-warm-white">
+        <div class="container-luxury">
+            <div class="text-center mb-20 fade-in">
+                <h2 class="section-title font-serif text-deep-charcoal mb-8 text-balance">
+                    Elite Legal Minds
+                </h2>
+                <p class="subtitle-text max-w-2xl mx-auto">
+                    Our partners represent the pinnacle of legal excellence
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-3 gap-12">
+                <div class="minimal-card p-10 rounded-none text-center fade-in">
+                    <div class="w-24 h-24 bg-luxury-gold flex items-center justify-center mx-auto mb-8">
+                        <span class="text-2xl font-serif font-medium text-deep-charcoal">MK</span>
+                    </div>
+                    <h3 class="text-xl font-serif font-medium mb-2 text-deep-charcoal">Michael Kensington</h3>
+                    <p class="text-luxury-gold mb-6 font-medium">Managing Partner</p>
+                    <p class="text-muted-gray leading-relaxed mb-8">
+                        Harvard Law graduate with 32+ years in complex commercial litigation. Former DOJ Senior Trial Attorney with unparalleled courtroom experience.
+                    </p>
+                    <div class="text-sm text-muted-gray">
+                        <div class="mb-2">Professional golfer and history enthusiast </div>
+                        <div>$2.8B+ in client recoveries</div>
+                    </div>
+                </div>
+                
+                <div class="minimal-card p-10 rounded-none text-center fade-in" style="animation-delay: 0.1s;">
+                    <div class="w-24 h-24 bg-luxury-gold flex items-center justify-center mx-auto mb-8">
+                        <span class="text-2xl font-serif font-medium text-deep-charcoal">SV</span>
+                    </div>
+                    <h3 class="text-xl font-serif font-medium mb-2 text-deep-charcoal">Sarah Vale</h3>
+                    <p class="text-luxury-gold mb-6 font-medium">Senior Partner</p>
+                    <p class="text-muted-gray leading-relaxed mb-8">
+                        Yale Law graduate specializing in securities litigation. Former Kent & Fine partner with extensive financial markets expertise.
+                    </p>
+                    <div class="text-sm text-muted-gray">
+                        <div class="mb-2">Entreprenuer and Former Consultant to Fortune 500 Company "</div>
+                        <div>28+ years elite practice</div>
+                    </div>
+                </div>
+                
+                <div class="minimal-card p-10 rounded-none text-center fade-in" style="animation-delay: 0.2s;">
+                    <div class="w-24 h-24 bg-luxury-gold flex items-center justify-center mx-auto mb-8">
+                        <span class="text-2xl font-serif font-medium text-deep-charcoal">DR</span>
+                    </div>
+                    <h3 class="text-xl font-serif font-medium mb-2 text-deep-charcoal">David Richardson</h3>
+                    <p class="text-luxury-gold mb-6 font-medium">Head of Investigations</p>
+                    <p class="text-muted-gray leading-relaxed mb-8">
+                        Columbia Law graduate focusing on fraud investigations. Former Federal Prosecutor SDNY with extensive white-collar experience.
+                    </p>
+                    <div class="text-sm text-muted-gray">
+                        <div class="mb-2">Benchmark Litigation "Star"</div>
+                        <div>Former ASAO Southern District</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-spacing bg-pearl-gray">
+        <div class="container-luxury">
+            <div class="grid lg:grid-cols-2 gap-20">
+                <div class="fade-in">
+                    <h2 class="section-title font-serif text-deep-charcoal mb-8 text-balance">
+                        Discuss Your Critical Case
+                    </h2>
+                    <p class="subtitle-text mb-12">
+                        When your enterprise faces mission-critical litigation, you need attorneys who fight with strategic precision and unmatched expertise.
+                    </p>
+                    
+                    <div class="space-y-10">
+                        <div class="flex items-start">
+                            <div class="minimal-icon rounded-none mr-8 flex-shrink-0">
+                                <svg class="w-6 h-6 text-luxury-gold" fill="currentColor" viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="text-deep-charcoal font-medium text-lg mb-2">Manhattan Office</div>
+                                <div class="text-muted-gray">200 Park Avenue, Suite 1700<br>New York, NY 10166</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="minimal-icon rounded-none mr-8 flex-shrink-0">
+                                <svg class="w-6 h-6 text-luxury-gold" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="text-deep-charcoal font-medium text-lg mb-2">Direct Line</div>
+                                <div class="text-muted-gray">(850) 427-6026</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="minimal-icon rounded-none mr-8 flex-shrink-0">
+                                <svg class="w-6 h-6 text-luxury-gold" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="text-deep-charcoal font-medium text-lg mb-2">Email</div>
+                                <div class="text-muted-gray">contact@kenvaleny.com</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="fade-in">
+                    <div class="minimal-card p-12 rounded-none">
+                        <h3 class="text-2xl font-serif font-medium mb-10 text-deep-charcoal">Schedule Consultation</h3>
+                        <form id="contact-form" class="space-y-8">
+                            <div class="grid md:grid-cols-2 gap-8">
+                                <div>
+                                    <label for="name" class="block text-deep-charcoal font-medium mb-3">Full Name *</label>
+                                    <input type="text" id="name" name="name" required class="luxury-input w-full px-4 py-4 rounded-none">
+                                </div>
+                                <div>
+                                    <label for="company" class="block text-deep-charcoal font-medium mb-3">Company *</label>
+                                    <input type="text" id="company" name="company" required class="luxury-input w-full px-4 py-4 rounded-none">
+                                </div>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-2 gap-8">
+                                <div>
+                                    <label for="email" class="block text-deep-charcoal font-medium mb-3">Email *</label>
+                                    <input type="email" id="email" name="email" required class="luxury-input w-full px-4 py-4 rounded-none">
+                                </div>
+                                <div>
+                                    <label for="phone" class="block text-deep-charcoal font-medium mb-3">Phone</label>
+                                    <input type="tel" id="phone" name="phone" class="luxury-input w-full px-4 py-4 rounded-none">
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label for="case-type" class="block text-deep-charcoal font-medium mb-3">Matter Type *</label>
+                                <select id="case-type" name="case-type" required class="luxury-input w-full px-4 py-4 rounded-none">
+                                    <option value="">Select Matter Type</option>
+                                    <option value="commercial-litigation">Commercial Litigation</option>
+                                    <option value="contract-disputes">Contract Disputes</option>
+                                    <option value="securities-litigation">Securities Litigation</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label for="message" class="block text-deep-charcoal font-medium mb-3">Case Details *</label>
+                                <textarea id="message" name="message" rows="5" required class="luxury-input w-full px-4 py-4 rounded-none" placeholder="Please provide details about your legal matter..."></textarea>
+                            </div>
+                            
+                            <button type="submit" class="luxury-button w-full py-4 text-lg rounded-none">
+                                Schedule Consultation
+                            </button>
+                            
+                            <p class="text-muted-gray text-center text-sm">
+                                All consultations are confidential and protected by attorney-client privilege.
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-deep-charcoal py-20">
+        <div class="container-luxury">
+            <div class="grid lg:grid-cols-3 gap-16 mb-16">
+                <div>
+                    <div class="flex items-center space-x-4 mb-8">
+                        <div class="w-10 h-10 bg-luxury-gold flex items-center justify-center">
+                            <svg class="w-6 h-6 text-deep-charcoal" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2L3.09 8.26L12 14L20.91 8.26L12 2ZM21 16L12 22L3 16L12 10L21 16Z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="text-white font-serif text-xl font-medium">Kensington & Vale</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed">
+                        Elite commercial litigation attorneys delivering exceptional results in complex business disputes worldwide.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-medium text-lg mb-8">Practice Areas</h4>
+                    <ul class="space-y-4 text-gray-400">
+                        <li>Commercial Litigation</li>
+                        <li>Contract Disputes</li>
+                        <li>Securities Litigation</li>
+                        <li>Asset Recovery</li>
+                        <li>International Arbitration</li>
+                        <li>IP Protection</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-medium text-lg mb-8">Contact</h4>
+                    <div class="space-y-6 text-gray-400">
+                        <div>
+                            <div class="text-white font-medium mb-2">New York Office</div>
+                            <div>200 Park Avenue, Suite 1700</div>
+                            <div>New York, NY 10166</div>
+                        </div>
+                        <div>
+                            <div class="text-white font-medium mb-2">Phone</div>
+                            <div>(212) 555-0147</div>
+                        </div>
+                        <div>
+                            <div class="text-white font-medium mb-2">Email</div>
+                            <div>contact@kenvaleny.com</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="luxury-divider bg-gray-600"></div>
+            
+            <div class="text-center text-gray-400">
+                <p>&copy; 2024 Kensington & Vale, LLP. All rights reserved.</p>
+                <p class="mt-2 text-sm">Attorney Advertising | Prior results do not guarantee similar outcome</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Progress bar
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('progress-bar').style.width = scrollPercent + '%';
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animated counters
+        function animateCounter(element, target, suffix = '', duration = 2000) {
+            let current = 0;
+            const increment = target / (duration / 16);
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                
+                let displayValue;
+                if (target === 4.8) {
+                    displayValue = current.toFixed(1);
+                } else {
+                    displayValue = Math.floor(current);
+                }
+                
+                element.textContent = displayValue + suffix;
+            }, 16);
+        }
+
+        // Intersection Observer
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    if (entry.target.classList.contains('stat-number')) {
+                        const target = parseFloat(entry.target.getAttribute('data-target'));
+                        let suffix = '';
+                        
+                        if (target === 4.8) suffix = 'B';
+                        else if (target === 98) suffix = '%';
+                        else if (target >= 32) suffix = '+';
+                        
+                        animateCounter(entry.target, target, suffix);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements
+        document.querySelectorAll('.fade-in, .stat-number').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Form submission
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            if (!data.name || !data.email || !data.company || !data['case-type'] || !data.message) {
+                showNotification('Please complete all required fields.', 'error');
+                return;
+            }
+            
+            const button = this.querySelector('button[type="submit"]');
+            const originalText = button.textContent;
+            
+            button.textContent = 'Processing...';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                button.textContent = 'CONSULTATION SCHEDULED';
+                button.style.background = '#10b981';
+                
+                showNotification('Your consultation request has been received. We will contact you within 2 hours during business days.', 'success');
+                
+                setTimeout(() => {
+                    this.reset();
+                    button.textContent = originalText;
+                    button.style.background = '';
+                    button.disabled = false;
+                }, 3000);
+            }, 1500);
+        });
+
+        // Notification system
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-24 right-8 p-6 z-50 max-w-md transform translate-x-full transition-all duration-500 ${
+                type === 'success' 
+                    ? 'bg-green-600 border border-green-500' 
+                    : 'bg-red-600 border border-red-500'
+            } text-white shadow-lg`;
+            
+            notification.innerHTML = `
+                <div class="flex items-start">
+                    <div class="mr-4">
+                        ${type === 'success' 
+                            ? '<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,16.5L6.5,12L7.91,10.59L11,13.67L16.59,8.09L18,9.5L11,16.5Z"/></svg>' 
+                            : '<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M15.59,7L12,10.59L8.41,7L7,8.41L10.59,12L7,15.59L8.41,17L12,13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z"/></svg>'
+                        }
+                    </div>
+                    <div class="flex-1">
+                        <div class="font-medium mb-1">${type === 'success' ? 'Success!' : 'Error'}</div>
+                        <div class="text-sm">${message}</div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 500);
+            }, 4000);
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98f9c7fbc49a435c',t:'MTc2MDY0MTAzOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
